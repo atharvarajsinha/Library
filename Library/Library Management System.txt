@@ -1,0 +1,2145 @@
+import javax.swing.*;
+import java.io.*;
+import java.awt.event.*;
+import java.awt.*;
+import java.io.FileReader;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date; 
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+import java.util.Calendar;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import java.io.FileNotFoundException.*;
+class Library
+{
+    static Image icon1 = Toolkit.getDefaultToolkit().getImage("D:\\Library\\Icons\\Library.png");
+    JFrame f, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15;
+    JLabel login, option, add, search, status, status_edit, about_books, add_book, search_book, NumberofBooks, Book_Edit, pass, sign, l1, l2, image, show, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18, l19, l20, l21, l22, l23, l24, l25, l26, l27, l28, l29, l30, l31, l32, l33, l34, l35, l36, l37, l38;
+    ImageIcon icon;
+    JButton b, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33, b34, b35, b36, b37, b38, b39, b40;
+    JProgressBar pb, pb1;
+    JTextField sbname, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25;
+    JComboBox cb1, cb2, cb3, cb4, cb5, cb6;
+    JPasswordField p1, p2, p3, p4;
+    
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar obj = Calendar.getInstance();
+    
+    Date date=null;
+    Date date1=null;
+    
+    int i, yn, nb, yn1, k, j, r, nob, nob1, nob2;
+    double x=0, finea, finese, u;
+    long diff, difference;
+    String file12, file11, cpass, file10, user, cpa, rcp, sub, file5, bn, nbs, p, file6, text, file7, file8, file9, bname, files, path, ftl, password, userpass, file, file1, namea, addressa, mobilea, issuea, returna, statusa, str, names, mobiles, file2, subjects, namese, mobilese, file3, file4;
+    String stat[] = {"--Select--", "Pending", "Returned"};
+    String upa[] = new String[2];
+    String A[] = {"Name                    : ", "Mobile Number   : ", "Address               : ", "Subject                 : ", "Book Name          : ", "Issue Date           : ", "Return Date         : ", "Status                   : ", "Fine                        : "};
+    String Subject[] = {"Accounting","Afrikaans","Ancient History","Arabic","Archeology","Architecture","Art & Design","Bengali","Biblical Hebrew","Biology","Business & Management","Chemistry","Classical Civilisation","Classical Greek","Classical Studies","Communication","Computer Science","Dance","Data Analysis & Statistics","Design","Digital Technology","Divinity","Drama","Dutch","Economics & Finance","Education & Teacher Training","Electronics","Energy & Earth Sciences","Engineering","English Language","English Literature","Environmental Studies","Ethics","Fashion","Film Studies","Food & Nutrition","French","Geography","Geology","German","Global Development","Greek","Gujrati","Health & Safety","Hindi","Hinduism","History","Humanities","Irish","Ismalic Studies","Italian","Japanese","Journalism","Latin","Law","Life & Health Sciences","Marine Science","Mathematics","Media Studies","Medicine","Modern Hebrew","Moving Image Arts","Music","Philanthropy","Philosophy","Physical Education","Physics","Polish","Politics","Portuguese","Psychology","Punjabi","Religious Studies","Science","Social Sciences","Sociology","Spanish","Sports Science","Systems and Control Technology","Tamil","Technology & Design","Telugu","Thinking Skills","Turkish","Urdu","Welsh"};
+    String D[] = {"Subject                    : ", "Title                          : ", "Number of Books : ", "Place                       : "};
+    String bdetail[] = new String[4];
+    String bd[] = new String[3];
+    String details[] = new String[9];
+    String edit[] = new String[9];
+    String all[] = new String[9];
+    String[] data = new String[9];
+    String bread[] = new String[3];
+    String up[] = new String[2];
+    void Loading()
+    {      
+        f = new JFrame("Starting");
+        
+        l1 = new JLabel("Library Management System");
+        l1.setFont(new Font("Algerian",Font.BOLD,32));
+        l1.setBounds(30,220,700,40);
+        l1.setForeground(Color.red);
+        
+        image = new JLabel(new ImageIcon("D:\\Library\\Icons\\Image.png"));
+        image.setBounds(202,20,200,200);
+        
+        l2 = new JLabel("Please Wait...");
+        l2.setBounds(240,310,200,40);
+        l2.setFont(new Font("Arial",Font.BOLD,20));
+        
+        pb = new JProgressBar();
+        pb.setBounds(100,280,400,30);
+        pb.setBorderPainted(true);
+        pb.setStringPainted(true);
+        pb.setBackground(Color.white);
+        pb.setForeground(Color.blue);
+        pb.setValue(0);
+        
+        b = new JButton("Start");
+        b.setBounds(220,315,150,30);
+        b.setForeground(new Color(0, 204, 0));
+        b.setBackground(new Color(255, 255, 204));
+        b.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f.dispose();
+                Interface();
+            }
+        }
+        );
+        
+        f.add(l1);
+        f.add(l2);
+        f.add(pb);
+        f.add(image);
+        
+        
+        f.setIconImage(icon1);
+        f.setLayout(null);
+        f.setSize(610,400);
+        f.setLocationRelativeTo(null);
+        f.getContentPane().setBackground(new Color(255, 204, 51));
+        f.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                f.dispose();
+                System.exit(0);
+            }
+        }
+        );
+        f.setVisible(true);
+        Load();
+    }
+    public void Load()
+    {
+        i=0;
+        while(i<=100)
+        {
+            try
+            {
+                Thread.sleep(50);
+                pb.setValue(i);
+                i++;
+                if(i==99)
+                {
+                    l2.setText("");
+                }
+                if(i==100)
+                {
+                    java.awt.Toolkit.getDefaultToolkit().beep();
+                    f.add(b);
+                }
+            }
+            catch(Exception h)
+            {
+                h.printStackTrace();
+            }
+        }
+    }
+    void Interface()
+    {
+        f1 = new JFrame("Library Management System");
+        
+        icon = new ImageIcon("D:\\Library\\Icons\\Background.png");
+        
+        b1 = new JButton("Next");
+        b1.setBounds(390,205,100,30);
+        b1.setBackground(Color.white);
+        b1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f1.dispose();
+                Login();
+            }
+        }
+        );
+        
+        f1.setIconImage(icon1);
+        f1.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f1.dispose();
+            }
+        });
+        f1.add(b1);
+        f1.add(new JLabel(icon));
+        f1.pack();
+        f1.setLocationRelativeTo(null);
+        f1.setVisible(true);
+    }
+    void Login()
+    {
+        f2 = new JFrame("Login");
+        
+        login = new JLabel("LOGIN");
+        login.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        login.setBounds(150,10,700,40);
+        login.setForeground(new Color(0,0,0));
+        
+        l3 = new JLabel("Username: ");
+        l3.setBounds(50,50,150,40);
+        
+        t1 = new JTextField();
+        t1.setBounds(120,60,150,20);
+        
+        l4 = new JLabel("Password: ");
+        l4.setBounds(50,80,150,40);
+        
+        p1 = new JPasswordField();
+        p1.setBounds(120,90,150,20);
+        
+        show = new JLabel();
+        show.setBounds(120,120,150,20);
+        
+        b2 = new JButton("Show");
+        b2.setBounds(280,90,69,20);
+        b2.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                password = ""+new String(p1.getPassword());
+                show.setText(password);
+            }
+        }
+        );
+        
+        b3 = new JButton("Login");
+        b3.setBounds(50,140,100,40);
+        b3.setForeground(new Color(0, 204, 0));
+        b3.setBackground(new Color(255, 255, 204));
+        b3.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                user = t1.getText();
+                password = ""+new String(p1.getPassword());
+                if(user.equals("") || password.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f2.dispose();
+                    Login();
+                }
+                else
+                {
+                    try
+                    {
+                        file = "D:\\Library\\Librarian\\"+user+".txt";
+                        FileReader fr = new FileReader(file);
+                        BufferedReader br = new BufferedReader(fr);
+                        i=0;
+                        while((userpass=br.readLine())!=null)
+                        {
+                            upa[i] = userpass;
+                            i=i+1;
+                        }
+                        if(upa[0].equals(user) && upa[1].equals(password))
+                        {
+                             f2.dispose();
+                             JOptionPane.showMessageDialog(null, "Successfully Login", "Librarian Login", 1);
+                             Options();
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "You may have enter wrong choice", "Wrong Input", 2);
+                        }
+                    }
+                    catch(IOException h)
+                    {
+                        f2.dispose();
+                        JOptionPane.showMessageDialog(null, "Librarian Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                        Login();
+                    }
+                }
+            }
+        }
+        );
+        
+        b4 = new JButton("Cancel");
+        b4.setBounds(180,140,90,40);
+        b4.setForeground(new Color(205, 92, 92));
+        b4.setBackground(new Color(255, 255, 204));
+        b4.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Error", JOptionPane.ERROR_MESSAGE);
+                f2.dispose();
+                Exit();
+            }
+        }
+        );
+        
+        l5 = new JLabel("Trouble in Login?");
+        l5.setForeground(Color.red);
+        l5.setBounds(10,270,150,40);
+        
+        b5 = new JButton("Forget Password");
+        b5.setBounds(120,275,150,30);
+        b5.setForeground(new Color(205, 92, 92));
+        b5.setBackground(new Color(255, 255, 204));
+        b5.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f2.dispose();
+                Password();
+            }
+        }
+        );
+        
+        l6 = new JLabel("Create an Account");
+        l6.setBounds(10,320,150,40);
+        l6.setForeground(new Color(0, 0, 255));
+        
+        b6 = new JButton("Sign Up");
+        b6.setBounds(120,325,100,30);
+        b6.setForeground(new Color(255, 153, 0));
+        b6.setBackground(new Color(255, 255, 204));
+        b6.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f2.dispose();
+                SignUp();
+            }
+        }
+        );
+        
+        f2.add(login);
+        f2.add(l3);
+        f2.add(t1);
+        f2.add(l4);
+        f2.add(p1);
+        f2.add(show);
+        f2.add(b2);
+        f2.add(b3);
+        f2.add(l5);
+        f2.add(b4);
+        f2.add(l6);
+        f2.add(b5);
+        f2.add(b6);
+        
+        f2.setIconImage(icon1);
+        f2.getContentPane().setBackground(new Color(176, 224, 230));
+        f2.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f2.dispose();
+                Exit();
+            }
+        });
+        f2.setSize(400,400);
+        f2.setLocationRelativeTo(null);
+        f2.setLayout(null);
+        f2.setVisible(true);
+    }
+    void Options()
+    {
+        f3 = new JFrame("Options");
+        
+        option = new JLabel("OPTIONS");
+        option.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        option.setBounds(80,10,700,40);
+        option.setForeground(new Color(0,0,0));
+        
+        b7 = new JButton("Add");
+        b7.setBounds(60,50,150,35);
+        b7.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f3.dispose();
+                Add();
+            }
+        }
+        );
+        
+        b8 = new JButton("Search");
+        b8.setBounds(60,90,150,35);
+        b8.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f3.dispose();
+                Search();
+            }
+        }
+        );
+        
+        b9 = new JButton("Status Edit");
+        b9.setBounds(60,130,150,35);
+        b9.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f3.dispose();
+                Status();
+            }
+        }
+        );
+        
+        b10 = new JButton("Show All Students");
+        b10.setBounds(60,170,150,35);
+        b10.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f3.dispose();
+                Show();
+            }
+        }
+        );
+        
+        b11 = new JButton("About Books");
+        b11.setBounds(60,210,150,35);
+        b11.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f3.dispose();
+                Books();
+            }
+        }
+        );
+        
+        b12 = new JButton("Exit");
+        b12.setBounds(60,250,150,35);
+        b12.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f3.dispose();
+                Login();
+            }
+        }
+        );
+        
+        f3.add(option);
+        f3.add(b7);
+        f3.add(b8);
+        f3.add(b9);
+        f3.add(b10);
+        f3.add(b11);
+        f3.add(b12);
+        
+        f3.setIconImage(icon1);
+        f3.getContentPane().setBackground(new Color(176, 224, 230));
+        f3.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f3.dispose();
+                Exit();
+            }
+        });
+        f3.setSize(280,350);
+        f3.setLocationRelativeTo(null);
+        f3.setLayout(null);
+        f3.setVisible(true);
+    }
+    @SuppressWarnings("unchecked")
+    void Add()
+    {
+        f4 = new JFrame("Adding the Student");
+        
+        add = new JLabel("ADD THE STUDENT");
+        add.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        add.setBounds(120,10,700,40);
+        add.setForeground(new Color(0,0,0));
+        
+        l7 = new JLabel("Name");
+        l7.setBounds(50,50,150,40);
+        
+        t2 = new JTextField();
+        t2.setBounds(140,60,150,20);
+        
+        l8 = new JLabel("Mobile Number");
+        l8.setBounds(50,80,150,40);
+        
+        t3 = new JTextField();
+        t3.setBounds(140,90,150,20);
+        
+        l9 = new JLabel("Address");
+        l9.setBounds(50,110,150,40);
+        
+        t4 = new JTextField();
+        t4.setBounds(140,120,150,20);
+        
+        l10 = new JLabel("Subject");
+        l10.setBounds(50,140,150,40);
+        
+        cb1 = new JComboBox(Subject);
+        cb1.setBounds(140,150,150,20);
+        sbname = new JTextField();
+        sbname.setBounds(300,150,150,20);
+        
+        l11 = new JLabel("Issue Date");
+        l11.setBounds(50,170,150,40);
+        
+        t5 = new JTextField();
+        t5.setBounds(140,180,150,20);
+        
+        l12 = new JLabel("Retrun Date");
+        l12.setBounds(50,200,150,40);
+        
+        t6 = new JTextField();
+        t6.setBounds(140,210,150,20);
+        
+        l13 = new JLabel("Status");
+        l13.setBounds(50,230,150,40);
+        
+        cb2 = new JComboBox(stat);
+        cb2.setBounds(140,240,150,20);
+        
+        b13 = new JButton("Add");
+        b13.setBounds(70,290,90,40);
+        b13.setForeground(new Color(0, 204, 0));
+        b13.setBackground(new Color(255, 255, 204));
+        b13.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                namea = t2.getText();
+                mobilea = t3.getText();
+                addressa = t4.getText();
+                subjects = ""+cb1.getItemAt(cb1.getSelectedIndex());
+                issuea = t5.getText();
+                returna = t6.getText();
+                statusa = ""+cb2.getItemAt(cb2.getSelectedIndex());
+                bname = sbname.getText();
+                if(bname.equals("") || namea.equals("") || addressa.equals("") || subjects.equals("") || issuea.equals("") || returna.equals("") || statusa.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f4.dispose();
+                    Add();
+                }
+                else
+                {
+                    try
+                    {
+                        file1 = "D:\\Library\\Students\\"+namea+""+mobilea+".txt";
+                        FileWriter fw = new FileWriter(file1);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter pw = new PrintWriter(bw);
+                        pw.println(namea);
+                        pw.println(mobilea);
+                        pw.println(addressa);
+                        pw.println(subjects);
+                        pw.println(bname);
+                        pw.println(issuea);
+                        pw.println(returna);
+                        pw.println(statusa);
+                        str = sdf.format(obj.getTime());
+                        date = sdf.parse(str);
+                        date1 = sdf.parse(returna);
+                        diff = date1.getTime() - date.getTime();
+                        TimeUnit time = TimeUnit.DAYS; 
+                        difference = time.convert(diff, TimeUnit.MILLISECONDS);
+                        if(difference<0 && statusa.equals("Pending"))
+                        {
+                            x = Math.abs(difference);
+                            finea = x*10.0;
+                        }
+                        else
+                        {
+                            finea = 0;
+                        }
+                        pw.println(finea);
+                        pw.close();
+                        
+                        files = "D:\\Library\\Books\\"+subjects+"\\"+bname+".txt";
+                        try
+                        {
+                            FileReader fr = new FileReader(files);
+                            BufferedReader br = new BufferedReader(fr);
+                            text="";
+                            i=0;
+                            while((text = br.readLine())!=null)
+                            {
+                                bread[i] = text;
+                                i++;
+                            }
+                            br.close();
+                            nb = Integer.parseInt(bread[1]);
+                            if(statusa.equals("Pending"))
+                            {
+                                nb = nb-1;
+                                try
+                                {
+                                    files = "D:\\Library\\Books\\"+subjects+"\\"+bname+".txt";
+                                    FileWriter fw1 = new FileWriter(files);
+                                    BufferedWriter bw1 = new BufferedWriter(fw1);
+                                    PrintWriter pw1 = new PrintWriter(bw1);
+                                    pw1.println(bread[0]);
+                                    pw1.println(nb);
+                                    pw1.println(bread[2]);
+                                    pw1.close();
+                                }
+                                catch(Exception h)
+                                {
+                                    JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+                                    Add();
+                                }
+                            }
+                            else
+                            {
+                                nb = nb+1;
+                                try
+                                {
+                                    files = "D:\\Library\\Books\\"+subjects+"\\"+bname+".txt";
+                                    FileWriter fw1 = new FileWriter(files);
+                                    BufferedWriter bw1 = new BufferedWriter(fw1);
+                                    PrintWriter pw1 = new PrintWriter(bw1);
+                                    pw1.println(bread[0]);
+                                    pw1.println(nb);
+                                    pw1.println(bread[2]);
+                                    pw1.close();
+                                }
+                                catch(Exception h)
+                                {
+                                    JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+                                    Add();
+                                }
+                            }
+                        }
+                        catch(Exception h)
+                        {
+                            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+                            Add();
+                        }
+                        JOptionPane.showMessageDialog(null, "Successfully Added the Student", "Add", 1);
+                        f4.dispose();
+                        Options();
+                    }
+                    catch(Exception h)
+                    {
+                        JOptionPane.showMessageDialog(null, "ErrorU", "Error", JOptionPane.ERROR_MESSAGE);
+                        f4.dispose();
+                        Add();
+                    }
+                }
+            }
+        }
+        );
+        
+        b14 = new JButton("Cancel");
+        b14.setBounds(180,290,90,40);
+        b14.setForeground(new Color(205, 92, 92));
+        b14.setBackground(new Color(255, 255, 204));
+        b14.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Cancelled", JOptionPane.ERROR_MESSAGE);
+                f4.dispose();
+                Options();
+            }
+        }
+        );
+        
+        f4.add(add);
+        f4.add(l7);
+        f4.add(t2);
+        f4.add(l8);
+        f4.add(t3);
+        f4.add(l9);
+        f4.add(t4);
+        f4.add(l10);
+        f4.add(t5);
+        f4.add(l11);
+        f4.add(t6);
+        f4.add(l12);
+        f4.add(l13);
+        f4.add(cb1);
+        f4.add(cb2);
+        f4.add(b13);
+        f4.add(b14);
+        f4.add(sbname);
+        
+        f4.setIconImage(icon1);
+        f4.getContentPane().setBackground(new Color(176, 224, 230));
+        f4.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f4.dispose();
+                Exit();
+            }
+        });
+        f4.setSize(500,380);
+        f4.setLocationRelativeTo(null);
+        f4.setLayout(null);
+        f4.setVisible(true);
+    }
+    void Search()
+    {
+        f5 = new JFrame("Searching");
+        
+        search = new JLabel("SEARCH THE STUDENT");
+        search.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        search.setBounds(35,10,700,40);
+        search.setForeground(new Color(0,0,0));
+        
+        l14 = new JLabel("Name");
+        l14.setBounds(50,50,150,40);
+        
+        t7 = new JTextField();
+        t7.setBounds(140,60,150,20);
+        
+        l15 = new JLabel("Mobile Number");
+        l15.setBounds(50,80,150,40);
+        
+        t8 = new JTextField();
+        t8.setBounds(140,90,150,20);
+        
+        b15 = new JButton("Search");
+        b15.setBounds(70,130,90,40);
+        b15.setForeground(new Color(0, 204, 0));
+        b15.setBackground(new Color(255, 255, 204));
+        b15.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                str = sdf.format(obj.getTime());
+                names = t7.getText();
+                mobiles = t8.getText();
+                if(names.equals("") || mobiles.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f5.dispose();
+                    Search();
+                }
+                else
+                {
+                    try
+                    {
+                        file2 = "D:\\Library\\Students\\"+names+""+mobiles+".txt";
+                        FileReader fr = new FileReader(file2);
+                        BufferedReader br = new BufferedReader(fr);
+                        i=0;
+                        text="";
+                        while((text=br.readLine())!=null)
+                        {
+                            all[i] = text;
+                            i++;
+                        }
+                        date = sdf.parse(str);
+                        date1 = sdf.parse(all[6]);
+                        diff = date1.getTime() - date.getTime();
+                        TimeUnit time = TimeUnit.DAYS; 
+                        difference = time.convert(diff, TimeUnit.MILLISECONDS);
+                        if(difference<0 && all[7].equals("Pending"))
+                        {
+                            x = Math.abs(difference);
+                            all[8] = String.valueOf(x*10.0);
+                        }
+                        else
+                        {
+                            all[8] = "0.0";
+                        }
+                        for(i=0; i<9; i++)
+                        {
+                            details[i] = A[i]+""+all[i];
+                        }
+                        br.close();
+                        JOptionPane.showMessageDialog(null, "Search Found!", "Search", 1);
+                        yn = JOptionPane.showConfirmDialog(null, "Do you want to see the Details", "Search", JOptionPane.YES_NO_CANCEL_OPTION);
+                        if(yn==0)
+                        {
+                            JOptionPane.showMessageDialog(null, details[0]+"\n"+details[1]+"\n"+details[2]+"\n"+details[3]+"\n"+details[4]+"\nToday Date          : "+str+"\n"+details[5]+"\n"+details[6]+"\n"+details[7]+"\n"+details[8], "Search", 1);
+                            f5.dispose();
+                            Options();
+                        }
+                        else
+                        {
+                            f5.dispose();
+                            Options();
+                        }
+                    }
+                    catch(Exception h)
+                    {
+                        JOptionPane.showMessageDialog(null,"Student Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        }
+        );
+        
+        b16 = new JButton("Cancel");
+        b16.setBounds(180,130,90,40);
+        b16.setForeground(new Color(205, 92, 92));
+        b16.setBackground(new Color(255, 255, 204));
+        b16.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Error", JOptionPane.ERROR_MESSAGE);
+                f5.dispose();
+                Options();
+            }
+        }
+        );
+        
+        f5.add(search);
+        f5.add(l14);
+        f5.add(l15);
+        f5.add(t7);
+        f5.add(t8);
+        f5.add(b15);
+        f5.add(b16);
+        
+        f5.setIconImage(icon1);
+        f5.setSize(370,250);
+        f5.getContentPane().setBackground(new Color(176, 224, 230));
+        f5.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f5.dispose();
+                Exit();
+            }
+        });
+        f5.setLocationRelativeTo(null);
+        f5.setLayout(null);
+        f5.setVisible(true);
+    }
+    void Status()
+    {
+        f6 = new JFrame("Status Edit");
+        
+        status = new JLabel("STATUS EDIT");
+        status.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        status.setBounds(100,10,700,40);
+        status.setForeground(new Color(0,0,0));
+        
+        l16 = new JLabel("Name");
+        l16.setBounds(50,50,150,40);
+        
+        t9 = new JTextField();
+        t9.setBounds(140,60,150,20);
+        
+        l17 = new JLabel("Mobile Number");
+        l17.setBounds(50,80,150,40);
+        
+        t10 = new JTextField();
+        t10.setBounds(140,90,150,20);
+        
+        b17 = new JButton("Edit");
+        b17.setBounds(70,130,90,40);
+        b17.setForeground(new Color(0, 204, 0));
+        b17.setBackground(new Color(255, 255, 204));
+        b17.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                namese = t9.getText();
+                mobilese = t10.getText();
+                if(namese.equals("") || mobilese.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f6.dispose();
+                    Status();
+                }
+                else
+                {
+                    try
+                    {
+                        file3 = "D:\\Library\\Students\\"+namese+""+mobilese+".txt";
+                        FileReader fr = new FileReader(file3);
+                        BufferedReader br = new BufferedReader(fr);
+                        i=0;
+                        text="";
+                        while((text=br.readLine())!=null)
+                        {
+                            edit[i] = text;
+                            i++;
+                        }
+                        br.close();
+                        f6.dispose();
+                        Edit();
+                    }
+                    catch(Exception h)
+                    {
+                        JOptionPane.showMessageDialog(null,"Student Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        }
+        );
+        
+        b18 = new JButton("Cancel");
+        b18.setBounds(180,130,90,40);
+        b18.setForeground(new Color(205, 92, 92));
+        b18.setBackground(new Color(255, 255, 204));
+        b18.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Error", JOptionPane.ERROR_MESSAGE);
+                f6.dispose();
+                Options();
+            }
+        }
+        );
+        
+        f6.add(status);
+        f6.add(l16);
+        f6.add(l17);
+        f6.add(t9);
+        f6.add(t10);
+        f6.add(b17);
+        f6.add(b18);
+        
+        f6.setIconImage(icon1);
+        f6.setSize(370,250);
+        f6.getContentPane().setBackground(new Color(176, 224, 230));
+        f6.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f6.dispose();
+                Exit();
+            }
+        });
+        f6.setLocationRelativeTo(null);
+        f6.setLayout(null);
+        f6.setVisible(true);
+    }
+    @SuppressWarnings("unchecked")
+    void Edit()
+    {
+        f7 = new JFrame("Editing");
+        
+        status_edit = new JLabel("STATUS EDIT");
+        status_edit.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        status_edit.setBounds(100,10,700,40);
+        status_edit.setForeground(new Color(0,0,0));
+         
+        l18 = new JLabel("Name");
+        l18.setBounds(50,50,150,40);
+                                
+        t11 = new JTextField();
+        t11.setBounds(140,60,150,20);
+        t11.setEditable(false);
+        t11.setText(namese);
+                                
+        l19 = new JLabel("Mobile Number");
+        l19.setBounds(50,80,150,40);
+                    
+        t12 = new JTextField();
+        t12.setBounds(140,90,150,20);
+        t12.setEditable(false);
+        t12.setText(mobilese);
+                    
+        l20 = new JLabel("Status");
+        l20.setBounds(50,110,150,40);
+                    
+        cb3 = new JComboBox(stat);
+        cb3.setBounds(140,120,150,20);
+                    
+        b19 = new JButton("Confirm");
+        b19.setBounds(70,160,90,40);
+        b19.setForeground(new Color(0, 204, 0));
+        b19.setBackground(new Color(255, 255, 204));
+        b19.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                edit[7] = ""+cb3.getItemAt(cb3.getSelectedIndex());
+                if(edit[7].equals("--Select--"))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f7.dispose();
+                    Edit();
+                }
+                else
+                {
+                    try
+                    {
+                        file4 = "D:\\Library\\Students\\"+namese+""+mobilese+".txt";
+                        FileWriter fw = new FileWriter(file4);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter pw = new PrintWriter(bw);
+                        pw.println(edit[0]);
+                        pw.println(edit[1]);
+                        pw.println(edit[2]);
+                        pw.println(edit[3]);
+                        pw.println(edit[4]);
+                        pw.println(edit[5]);
+                        pw.println(edit[6]);
+                        pw.println(edit[7]);
+                        str = sdf.format(obj.getTime());
+                        date = sdf.parse(str);
+                        date1 = sdf.parse(edit[6]);
+                        diff = date1.getTime() - date.getTime();
+                        TimeUnit time = TimeUnit.DAYS; 
+                        difference = time.convert(diff, TimeUnit.MILLISECONDS);
+                        if(difference<0 && edit[7].equals("Pending"))
+                        {
+                            x = Math.abs(difference);
+                            finese = x*10.0;
+                        }
+                        else
+                        {
+                            finese = 0.0;
+                        }
+                        edit[8] = ""+(finese);
+                        pw.println(edit[8]);
+                        pw.close();
+                        
+                        files = "D:\\Library\\Books\\"+edit[3]+"\\"+edit[4]+".txt";
+                        try
+                        {
+                            FileReader fr = new FileReader(files);
+                            BufferedReader br = new BufferedReader(fr);
+                            text="";
+                            i=0;
+                            while((text = br.readLine())!=null)
+                            {
+                                bread[i] = text;
+                                i++;
+                            }
+                            br.close();
+                            nb = Integer.parseInt(bread[1]);
+                            if(edit[7].equals("Pending"))
+                            {
+                                nb = nb-1;
+                                try
+                                {
+                                    files = "D:\\Library\\Books\\"+edit[3]+"\\"+edit[4]+".txt";
+                                    FileWriter fw1 = new FileWriter(files);
+                                    BufferedWriter bw1 = new BufferedWriter(fw1);
+                                    PrintWriter pw1 = new PrintWriter(bw1);
+                                    pw1.println(bread[0]);
+                                    pw1.println(nb);
+                                    pw1.println(bread[2]);
+                                    pw1.close();
+                                }
+                                catch(Exception h)
+                                {
+                                    JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+                                    Add();
+                                }
+                            }
+                            else
+                            {
+                                nb = nb+1;
+                                try
+                                {
+                                    files = "D:\\Library\\Books\\"+edit[3]+"\\"+edit[4]+".txt";
+                                    FileWriter fw1 = new FileWriter(files);
+                                    BufferedWriter bw1 = new BufferedWriter(fw1);
+                                    PrintWriter pw1 = new PrintWriter(bw1);
+                                    pw1.println(bread[0]);
+                                    pw1.println(nb);
+                                    pw1.println(bread[2]);
+                                    pw1.close();
+                                }
+                                catch(Exception h)
+                                {
+                                    JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+                                    Add();
+                                }
+                            }
+                        }
+                        catch(Exception h)
+                        {
+                            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+                            Add();
+                        }
+                        JOptionPane.showMessageDialog(null, "Successfully Updated", "Status", 1);
+                        f7.dispose();
+                        Options();
+                    }
+                    catch(Exception h)
+                    {
+                        JOptionPane.showMessageDialog(null,"Student Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        }
+        );
+        
+        b20 = new JButton("Cancel");
+        b20.setBounds(180,160,90,40);
+        b20.setForeground(new Color(205, 92, 92));
+        b20.setBackground(new Color(255, 255, 204));
+        b20.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Error", JOptionPane.ERROR_MESSAGE);
+                f7.dispose();
+                Options();
+            }
+        }
+        );
+        
+        f7.add(status_edit);
+        f7.add(l18);
+        f7.add(t11);
+        f7.add(l19);
+        f7.add(t12);
+        f7.add(l20);
+        f7.add(cb3);
+        f7.add(b19);
+        f7.add(b20);
+        
+        f7.setIconImage(icon1);
+        f7.setSize(370,300);
+        f7.getContentPane().setBackground(new Color(176, 224, 230));
+        f7.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f7.dispose();
+                Exit();
+            }
+        });
+        f7.setLocationRelativeTo(null);
+        f7.setLayout(null);
+        f7.setVisible(true);
+    }
+    void Show()
+    {
+        try
+        {
+            path = "D:\\Library\\Students"; 
+    
+            File folder = new File(path);
+            File[] listOfFiles = folder.listFiles(); 
+            String files[] = new String[listOfFiles.length];
+            str = sdf.format(obj.getTime());
+            for (i = 0; i < listOfFiles.length; i++) 
+            {
+                if (listOfFiles[i].isFile()) 
+                {
+                    files[i] = listOfFiles[i].getName();
+                }
+            }
+            for(i=0; i<files.length; i++)
+            {
+                ftl = path+"\\"+files[i];
+                FileReader fr = new FileReader(ftl);
+                BufferedReader br = new BufferedReader(fr);
+                text="";
+                j=0;
+                while((text=br.readLine())!=null)
+                {
+                    all[j] = text;
+                    j++;
+                }
+                str = sdf.format(obj.getTime());
+                date = sdf.parse(str);
+                date1 = sdf.parse(all[6]);
+                diff = date1.getTime() - date.getTime();
+                TimeUnit time = TimeUnit.DAYS; 
+                difference = time.convert(diff, TimeUnit.MILLISECONDS);
+                if(difference<0 && all[7].equals("Pending"))
+                {
+                    x = Math.abs(difference);
+                    all[8] = String.valueOf(x*10.0);
+                }
+                else
+                {
+                    all[8] = "0.0";
+                }
+                for(k=0; k<9; k++)
+                {
+                    data[k] = A[k]+""+all[k];
+                }
+                JOptionPane.showMessageDialog(null, data[0]+"\n"+data[1]+"\n"+data[2]+"\n"+data[3]+"\n"+data[4]+"\n"+data[5]+"\n"+data[6]+"\n"+data[7]+"\n"+data[8], "Show", 1);
+                br.close();
+                if(i==(files.length-1))
+                {
+                    JOptionPane.showMessageDialog(null, "Done\nShowed All the Students", "Show", 1);
+                }
+            }
+        }
+        catch(Exception h)
+        {
+            JOptionPane.showMessageDialog(null,"Student Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        Options();
+    }
+    void Books()
+    {
+        f8 = new JFrame("About Books");
+        
+        about_books = new JLabel("ABOUT BOOKS");
+        about_books.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        about_books.setBounds(45,10,700,40);
+        about_books.setForeground(new Color(0,0,0));
+        
+        b21 = new JButton("Add");
+        b21.setBounds(40,50,200,35);
+        b21.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f8.dispose();
+                Badd();
+            }
+        }
+        );
+        
+        b22 = new JButton("Search");
+        b22.setBounds(40,90,200,35);
+        b22.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f8.dispose();
+                Bsearch();
+            }
+        }
+        );
+        
+        b23 = new JButton("Show All");
+        b23.setBounds(40,130,200,35);
+        b23.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f8.dispose();
+                Bshow();
+            }
+        }
+        );
+        
+        b24 = new JButton("Number of Books Change");
+        b24.setBounds(40,170,200,35);
+        b24.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f8.dispose();
+                NBC();
+            }
+        }
+        );
+        
+        b25 = new JButton("Exit");
+        b25.setBounds(40,210,200,35);
+        b25.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f8.dispose();
+                Options();
+            }
+        }
+        );
+        
+        f8.add(about_books);
+        f8.add(b21);
+        f8.add(b22);
+        f8.add(b23);
+        f8.add(b24);
+        f8.add(b25);
+        
+        f8.setIconImage(icon1);
+        f8.getContentPane().setBackground(new Color(176, 224, 230));
+        f8.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f8.dispose();
+                Exit();
+            }
+        });
+        f8.setSize(300,350);
+        f8.setLocationRelativeTo(null);
+        f8.setLayout(null);
+        f8.setVisible(true);
+    }
+    @SuppressWarnings("unchecked")
+    void Badd()
+    {
+        f9 = new JFrame("Books Add");
+        
+        add_book = new JLabel("ADD BOOKS");
+        add_book.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        add_book.setBounds(100,10,700,40);
+        add_book.setForeground(new Color(0,0,0));
+        
+        l21 = new JLabel("Subject");
+        l21.setBounds(50,50,150,40);
+        
+        cb4 = new JComboBox(Subject);
+        cb4.setBounds(150,60,150,20);
+        
+        l22 = new JLabel("Title");
+        l22.setBounds(50,80,150,40);
+        
+        t13 = new JTextField();
+        t13.setBounds(150,90,150,20);
+        
+        l23 = new JLabel("Number of Books");
+        l23.setBounds(50,110,150,40);
+        
+        t14 = new JTextField();
+        t14.setBounds(150,120,150,20);
+        
+        l24 = new JLabel("Place");
+        l24.setBounds(50,140,150,40);
+        
+        t15 = new JTextField();
+        t15.setBounds(150,150,150,20);
+        
+        b26 = new JButton("Add");
+        b26.setBounds(70,190,90,40);
+        b26.setForeground(new Color(0, 204, 0));
+        b26.setBackground(new Color(255, 255, 204));
+        b26.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                sub = ""+cb4.getItemAt(cb4.getSelectedIndex());
+                bn = t13.getText();
+                nbs = t14.getText();
+                p = t15.getText();
+                if(bn.equals("") || nbs.equals("") || p.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f9.dispose();
+                    Badd();
+                }
+                else
+                {
+                    try
+                    {
+                        file5 = "D:\\Library\\Books\\"+sub+"\\"+bn+".txt";
+                        FileWriter fw = new FileWriter(file5);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter pw = new PrintWriter(bw);
+                        pw.println(bn);
+                        pw.println(nbs);
+                        pw.println(p);
+                        pw.close();
+                        
+                        JOptionPane.showMessageDialog(null, "Successfully Added the Book", "Add", 1);
+                        f9.dispose();
+                        Books();
+                    }
+                    catch(Exception h)
+                    {
+                        JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+                        f9.dispose();
+                        Badd();
+                    }
+                }
+            }
+        }
+        );
+        
+        b27 = new JButton("Cancel");
+        b27.setBounds(190,190,90,40);
+        b27.setForeground(new Color(205, 92, 92));
+        b27.setBackground(new Color(255, 255, 204));
+        b27.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Cancelled", JOptionPane.ERROR_MESSAGE);
+                f9.dispose();
+                Books();
+            }
+        }
+        );
+        
+        f9.add(add_book);
+        f9.add(l21);
+        f9.add(l22);
+        f9.add(l23);
+        f9.add(l24);
+        f9.add(cb4);
+        f9.add(t13);
+        f9.add(t14);
+        f9.add(t15);
+        f9.add(b26);
+        f9.add(b27);
+        
+        f9.setIconImage(icon1);
+        f9.getContentPane().setBackground(new Color(176, 224, 230));
+        f9.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f9.dispose();
+                Exit();
+            }
+        });
+        f9.setSize(380,300);
+        f9.setLocationRelativeTo(null);
+        f9.setLayout(null);
+        f9.setVisible(true);
+    }
+    @SuppressWarnings("unchecked")
+    void Bsearch()
+    {
+        f10 = new JFrame("Book Search");
+        
+        search_book = new JLabel("SEARCH BOOKS");
+        search_book.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        search_book.setBounds(50,10,700,40);
+        search_book.setForeground(new Color(0,0,0));
+        
+        l25 = new JLabel("Subject");
+        l25.setBounds(50,50,150,40);
+        
+        cb5 = new JComboBox(Subject);
+        cb5.setBounds(100,60,150,20);
+        
+        l26 = new JLabel("Title");
+        l26.setBounds(50,80,150,40);
+        
+        t16 = new JTextField();
+        t16.setBounds(100,90,150,20);
+        
+        b28 = new JButton("Search");
+        b28.setBounds(50,120,90,40);
+        b28.setForeground(new Color(0, 204, 0));
+        b28.setBackground(new Color(255, 255, 204));
+        b28.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                sub = ""+cb5.getItemAt(cb5.getSelectedIndex());
+                bn = t16.getText();
+                if(bn.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f10.dispose();
+                    Bsearch();
+                }
+                else
+                {
+                    try
+                    {
+                        file6 = "D:\\Library\\Books\\"+sub+"\\"+bn+".txt";
+                        FileReader fr = new FileReader(file6);
+                        BufferedReader br = new BufferedReader(fr);
+                        text="";
+                        i=0;
+                        while((text=br.readLine())!=null)
+                        {
+                            bdetail[i] = text;
+                            i++;
+                        }
+                        br.close();
+                        JOptionPane.showMessageDialog(null, "Search Found!", "Book Search", 1);
+                        yn1 = JOptionPane.showConfirmDialog(null, "Do you want to see the details", "Book Search", JOptionPane.YES_NO_CANCEL_OPTION);
+                        if(yn1==0)
+                        {
+                            JOptionPane.showMessageDialog(null, D[0]+""+sub+"\n"+D[1]+""+bn+"\n"+D[2]+""+bdetail[1]+"\n"+D[3]+""+bdetail[2]);
+                            f10.dispose();
+                            Books();
+                        }
+                    }
+                    catch(Exception h)
+                    {
+                        JOptionPane.showMessageDialog(null,"Book Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        }
+        );
+        
+        b29 = new JButton("Cancel");
+        b29.setBounds(160,120,90,40);
+        b29.setForeground(new Color(205, 92, 92));
+        b29.setBackground(new Color(255, 255, 204));
+        b29.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Cancelled", JOptionPane.ERROR_MESSAGE);
+                f10.dispose();
+                Books();
+            }
+        }
+        );
+        
+        f10.add(search_book);
+        f10.add(l25);
+        f10.add(l26);
+        f10.add(cb5);
+        f10.add(t16);
+        f10.add(b28);
+        f10.add(b29);
+        
+        f10.setIconImage(icon1);
+        f10.getContentPane().setBackground(new Color(176, 224, 230));
+        f10.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f10.dispose();
+                Exit();
+            }
+        });
+        f10.setSize(320,230);
+        f10.setLocationRelativeTo(null);
+        f10.setLayout(null);
+        f10.setVisible(true);
+    }
+    void Bshow()
+    {
+        File folder = new File("D:\\Library\\Books");
+        String lists[] = folder.list();
+        for(i=0; i<lists.length; i++)
+        {
+            File folder1 = new File("D:\\Library\\Books\\"+lists[i]);
+            String lists1[] = folder1.list();
+            for(j=0; j<lists1.length; j++)
+            {
+                try
+                {
+                    file7 = "D:\\Library\\Books\\"+lists[i]+"\\"+lists1[j];
+                    FileReader fr = new FileReader(file7);
+                    BufferedReader br = new BufferedReader(fr);
+                    text="";
+                    k=0;
+                    while((text=br.readLine())!=null)
+                    {
+                        bdetail[k+1] = text;
+                        k++;
+                    }
+                    br.close();
+                    bdetail[0] = lists[i];
+                    JOptionPane.showMessageDialog(null, D[0]+""+bdetail[0]+"\n"+D[1]+""+bdetail[1]+"\n"+D[2]+""+bdetail[2]+"\n"+D[3]+""+bdetail[3], "Show Books", 1);
+                    JOptionPane.showMessageDialog(null, "Done\nShowed All the Books", "Show", 1);
+                    Books();
+                }
+                catch(Exception h)
+                {
+                    JOptionPane.showMessageDialog(null,"Book Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+    @SuppressWarnings("unchecked")
+    void NBC()
+    {
+        f11 = new JFrame("Number of Books Change");
+        
+        NumberofBooks = new JLabel("NUMBER OF BOOKS");
+        NumberofBooks.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        NumberofBooks.setBounds(50,10,700,40);
+        NumberofBooks.setForeground(new Color(0,0,0));
+        
+        l27 = new JLabel("Subject");
+        l27.setBounds(50,50,150,40);
+        
+        cb6 = new JComboBox(Subject);
+        cb6.setBounds(150,60,150,20);
+        
+        l28 = new JLabel("Title");
+        l28.setBounds(50,80,150,40);
+        
+        t17 = new JTextField();
+        t17.setBounds(150,90,150,20);
+        
+        b30 = new JButton("Edit");
+        b30.setBounds(70,120,90,40);
+        b30.setForeground(new Color(0, 204, 0));
+        b30.setBackground(new Color(255, 255, 204));
+        b30.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f11.dispose();
+                sub = ""+cb6.getItemAt(cb6.getSelectedIndex());
+                bn = t17.getText();
+                if(bn.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f11.dispose();
+                    NBC();
+                }
+                else
+                {
+                    ENB();
+                }
+            }
+        }
+        );
+        
+        b31 = new JButton("Cancel");
+        b31.setBounds(190,120,90,40);
+        b31.setForeground(new Color(205, 92, 92));
+        b31.setBackground(new Color(255, 255, 204));
+        b31.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Cancelled", JOptionPane.ERROR_MESSAGE);
+                f11.dispose();
+                Books();
+            }
+        }
+        );
+        
+        f11.add(NumberofBooks);
+        f11.add(l27);
+        f11.add(cb6);
+        f11.add(l28);
+        f11.add(t17);
+        f11.add(b30);
+        f11.add(b31);
+        
+        f11.setIconImage(icon1);
+        f11.getContentPane().setBackground(new Color(176, 224, 230));
+        f11.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f11.dispose();
+                Exit();
+            }
+        });
+        f11.setSize(370,220);
+        f11.setLocationRelativeTo(null);
+        f11.setLayout(null);
+        f11.setVisible(true);
+    }
+    void ENB()
+    {
+        f12 = new JFrame("Edit");
+        
+        Book_Edit = new JLabel("NUMBER OF BOOKS CHANGE");
+        Book_Edit.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        Book_Edit.setBounds(5,10,700,40);
+        Book_Edit.setForeground(new Color(0,0,0));
+        
+        l29 = new JLabel("Subject");
+        l29.setBounds(50,50,150,40);
+        
+        t18 = new JTextField();
+        t18.setBounds(150,60,150,20);
+        t18.setEditable(false);
+        t18.setText(sub);
+        
+        l30 = new JLabel("Title");
+        l30.setBounds(50,80,150,40);
+        
+        t19 = new JTextField();
+        t19.setBounds(150,90,150,20);
+        t19.setEditable(false);
+        t19.setText(bn);
+        
+        l31 = new JLabel("Number of Books");
+        l31.setBounds(50,110,150,40);
+        
+        t20 = new JTextField();
+        t20.setBounds(150,120,150,20);
+        
+        b32 = new JButton("Edit");
+        b32.setBounds(70,150,90,40);
+        b32.setForeground(new Color(0, 204, 0));
+        b32.setBackground(new Color(255, 255, 204));
+        b32.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                nbs = t20.getText();
+                if(nbs.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f12.dispose();
+                    ENB();
+                }
+                else
+                {
+                    try
+                    {
+                        file8 = "D:\\Library\\Books\\"+sub+"\\"+bn+".txt";
+                        FileReader fr = new FileReader(file8);
+                        BufferedReader br = new BufferedReader(fr);
+                        text="";
+                        i=0;
+                        while((text=br.readLine())!=null)
+                        {
+                            bd[i] = text;
+                            i++;
+                        }
+                        nob = Integer.parseInt(bd[1]);
+                        nob1 = Integer.parseInt(nbs);
+                        nob2 = nob+nob1;
+                        br.close();
+                        try
+                        {
+                            file9 = "D:\\Library\\Books\\"+sub+"\\"+bn+".txt";
+                            FileWriter fw = new FileWriter(file9);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            PrintWriter pw = new PrintWriter(bw);
+                            pw.println(bd[0]);
+                            pw.println(nob2);
+                            pw.println(bd[2]);
+                            pw.close();
+                            JOptionPane.showMessageDialog(null, "Successfully Updated", "Number of Books Edit", 1);
+                            f12.dispose();
+                            Books();
+                        }
+                        catch(Exception h)
+                        {
+                            JOptionPane.showMessageDialog(null,"Book Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    catch(Exception h)
+                    {
+                        JOptionPane.showMessageDialog(null,"Book Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        }
+        );
+        
+        b33 = new JButton("Cancel");
+        b33.setBounds(190,150,90,40);
+        b33.setForeground(new Color(205, 92, 92));
+        b33.setBackground(new Color(255, 255, 204));
+        b33.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Cancelled", JOptionPane.ERROR_MESSAGE);
+                f12.dispose();
+                Books();
+            }
+        }
+        );
+        
+        f12.add(Book_Edit);
+        f12.add(l29);
+        f12.add(t18);
+        f12.add(l30);
+        f12.add(t19);
+        f12.add(l31);
+        f12.add(t20);
+        f12.add(b32);
+        f12.add(b33);
+        
+        f12.setIconImage(icon1);
+        f12.getContentPane().setBackground(new Color(176, 224, 230));
+        f12.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f12.dispose();
+                Exit();
+            }
+        });
+        f12.setSize(390,250);
+        f12.setLocationRelativeTo(null);
+        f12.setLayout(null);
+        f12.setVisible(true);
+    }
+    void Password()
+    {
+        f13 = new JFrame("Password Reset");
+        
+        pass = new JLabel("PASSWORD RESET");
+        pass.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        pass.setBounds(130,10,700,40);
+        pass.setForeground(new Color(0,0,0));
+        
+        l32 = new JLabel("Username");
+        l32.setBounds(50,50,150,40);
+        
+        t21 = new JTextField();
+        t21.setBounds(140,60,150,20);
+        
+        l33 = new JLabel("Captcha");
+        l33.setBounds(50,80,150,40);
+        
+        t22 = new JTextField();
+        t22.setBounds(140,90,150,20);
+        
+        u = Math.random()*5+1;
+        r = (int)u;
+        t23 = new JTextField();
+        t23.setBounds(300,90,150,20);
+        t23.setEditable(false);
+        if(r==1)
+        {
+            t23.setText("LHJ7P1");
+        }
+        else if(r==2)
+        {
+            t23.setText("JCQR5A");
+        }
+        else if(r==3)
+        {
+            t23.setText("BZHH74");
+        }
+        else if(r==4)
+        {
+            t23.setText("N9BK19");
+        }
+        else if(r==5)
+        {
+            t23.setText("VM6B37");
+        }
+        else
+        {
+            t23.setText("BS67ZN");
+        }
+        
+        b34 = new JButton("Password Reset");
+        b34.setBounds(50,120,135,40);
+        b34.setForeground(new Color(0, 204, 0));
+        b34.setBackground(new Color(255, 255, 204));
+        b34.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                f13.dispose();
+                Reset();
+            }
+        }
+        );
+        
+        b35 = new JButton("Cancel");
+        b35.setBounds(200,120,90,40);
+        b35.setForeground(new Color(205, 92, 92));
+        b35.setBackground(new Color(255, 255, 204));
+        b35.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Cancelled", JOptionPane.ERROR_MESSAGE);
+                f13.dispose();
+                Login();
+            }
+        }
+        );
+        
+        f13.add(pass);
+        f13.add(l32);
+        f13.add(t21);
+        f13.add(l33);
+        f13.add(t22);
+        f13.add(t23);
+        f13.add(b34);
+        f13.add(b35);
+        
+        f13.setIconImage(icon1);
+        f13.getContentPane().setBackground(new Color(176, 224, 230));
+        f13.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f13.dispose();
+                Exit();
+            }
+        });
+        f13.setSize(500,230);
+        f13.setLocationRelativeTo(null);
+        f13.setLayout(null);
+        f13.setVisible(true);
+    }
+    void Reset()
+    {
+        user = t21.getText();
+        cpa = t22.getText();
+        rcp = t23.getText();
+        if(user.equals("") || cpa.equals("") || rcp.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+            f13.dispose();
+            Password();
+        }
+        else
+        {
+            if(cpa.equals(rcp))
+            {
+                file10 = "D:\\Library\\Librarian\\"+user+".txt";
+                try
+                {
+                    FileReader fr = new FileReader(file10);
+                    BufferedReader br = new BufferedReader(fr);
+                    text="";
+                    i=0;
+                    while((text=br.readLine())!=null)
+                    {
+                        up[i] = text;
+                        i++;
+                    }
+                    br.close();
+                    RE();
+                }
+                catch(Exception h)
+                {
+                    JOptionPane.showMessageDialog(null,"Librarian Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                    Password();
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Wrong Captcha", "Error", JOptionPane.ERROR_MESSAGE);
+                f13.dispose();
+                Password();
+            }
+        }
+    }
+    void RE()
+    {
+        f14 = new JFrame("Password");
+        
+        pass = new JLabel("PASSWORD RESET");
+        pass.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        pass.setBounds(75,10,700,40);
+        pass.setForeground(new Color(0,0,0));
+                        
+        l34 = new JLabel("New Password");
+        l34.setBounds(50,50,200,40);
+                
+        p2 = new JPasswordField();
+        p2.setBounds(160,60,150,20);
+                        
+        l35 = new JLabel("Confirm Password");
+        l35.setBounds(50,80,200,40);
+                
+        p3 = new JPasswordField();
+        p3.setBounds(160,90,150,20);
+                        
+        b36 = new JButton("Change");
+        b36.setBounds(70,120,90,40);
+        b36.setForeground(new Color(0, 204, 0));
+        b36.setBackground(new Color(255, 255, 204));
+        b36.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                password = ""+(new String(p2.getPassword()));
+                cpass = ""+(new String(p3.getPassword()));
+                if(password.equals("") || cpass.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f14.dispose();
+                    RE();
+                }
+                else
+                {
+                    if(password.equals(cpass) && (!password.equals(up[1])))
+                    {
+                        file11 = "D:\\Library\\Librarian\\"+user+".txt";
+                        try
+                        {
+                            FileWriter fw = new FileWriter(file11);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            PrintWriter pw = new PrintWriter(bw);
+                            pw.println(user);
+                            pw.println(password);
+                            pw.close();
+                            JOptionPane.showMessageDialog(null, "Successfully Changed", "Password" ,1);
+                            f14.dispose();
+                        }
+                        catch(Exception h)
+                        {
+                            JOptionPane.showMessageDialog(null,"Librarian Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else if(password.equals(cpass) && password.equals(up[1]))
+                    {
+                        JOptionPane.showMessageDialog(null, "This is Old Password", "Error", JOptionPane.ERROR_MESSAGE);
+                        f14.dispose();
+                        Password();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Password Not Match", "Error", JOptionPane.ERROR_MESSAGE);
+                        f14.dispose();
+                        Password();
+                    }
+                }
+            }
+        }
+        );
+                        
+        b37 = new JButton("Cancel");
+        b37.setBounds(200,120,90,40);
+        b37.setForeground(new Color(205, 92, 92));
+        b37.setBackground(new Color(255, 255, 204));
+        b37.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Cancelled", JOptionPane.ERROR_MESSAGE);
+                f14.dispose();
+                Password();
+            }
+        }
+        );
+                
+        f14.add(pass);
+        f14.add(l34);
+        f14.add(l35);
+        f14.add(p2);
+        f14.add(p3);
+        f14.add(b36);
+        f14.add(b37);
+                        
+        f14.setIconImage(icon1);
+        f14.getContentPane().setBackground(new Color(176, 224, 230));
+        f14.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f14.dispose();
+                Exit();
+            }
+        });
+        f14.setSize(380,230);
+        f14.setLocationRelativeTo(null);
+        f14.setLayout(null);
+        f14.setVisible(true);
+    }
+    void SignUp()
+    {
+        f15 = new JFrame("Creating an Account");
+        
+        sign = new JLabel("CREATING ACCOUNT");
+        sign.setFont(new Font("Bernard MT Condensed",Font.BOLD,32));
+        sign.setBounds(65,10,700,40);
+        sign.setForeground(new Color(0,0,0));
+        
+        l36 = new JLabel("Username: ");
+        l36.setBounds(50,50,150,40);
+        
+        t24 = new JTextField();
+        t24.setBounds(120,60,150,20);
+        
+        l37 = new JLabel("Password: ");
+        l37.setBounds(50,80,150,40);
+        
+        p4 = new JPasswordField();
+        p4.setBounds(120,90,150,20);
+        
+        show = new JLabel();
+        show.setBounds(120,120,150,20);
+        
+        b38 = new JButton("Show");
+        b38.setBounds(280,90,69,20);
+        b38.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                password = ""+new String(p4.getPassword());
+                show.setText(password);
+            }
+        }
+        );
+        
+        b39 = new JButton("Sign Up");
+        b39.setBounds(50,140,100,40);
+        b39.setForeground(new Color(0, 204, 0));
+        b39.setBackground(new Color(255, 255, 204));
+        b39.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                user = t24.getText();
+                password = ""+(new String(p4.getPassword()));
+                if(user.equals("") || password.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Empty", "Error", JOptionPane.ERROR_MESSAGE);
+                    f15.dispose();
+                    SignUp();
+                }
+                else
+                {
+                    file12 = "D:\\Library\\Librarian\\"+user+".txt";
+                    try
+                    {
+                        FileWriter fw = new FileWriter(file12);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter pw = new PrintWriter(bw);
+                        pw.println(user);
+                        pw.println(password);
+                        pw.close();
+                        JOptionPane.showMessageDialog(null, "Successfully Account Created", "Sign Up", 1);
+                        f15.dispose();
+                        Login();
+                    }
+                    catch(Exception h)
+                    {
+                        JOptionPane.showMessageDialog(null,"File not Created", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        }
+        );
+        
+        b40 = new JButton("Cancel");
+        b40.setBounds(180,140,90,40);
+        b40.setForeground(new Color(205, 92, 92));
+        b40.setBackground(new Color(255, 255, 204));
+        b40.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(null, "Cancelled by User", "Error", JOptionPane.ERROR_MESSAGE);
+                f15.dispose();
+                Login();
+            }
+        }
+        );
+        
+        f15.add(sign);
+        f15.add(l36);
+        f15.add(t24);
+        f15.add(l37);
+        f15.add(p4);
+        f15.add(show);
+        f15.add(b38);
+        f15.add(b39);
+        f15.add(b40);
+        
+        f15.setIconImage(icon1);
+        f15.getContentPane().setBackground(new Color(176, 224, 230));
+        f15.addWindowListener(new WindowAdapter() 
+        {
+            @Override
+            public void windowClosing(WindowEvent e) 
+            {
+                f15.dispose();
+                Exit();
+            }
+        });
+        f15.setSize(400,250);
+        f15.setLocationRelativeTo(null);
+        f15.setLayout(null);
+        f15.setVisible(true);
+    }
+    void Exit()
+    {
+        JOptionPane.showMessageDialog(null, "All Data Saved to: D:\\Library", "Exit!", 1);
+        JOptionPane.showMessageDialog(null, "Thanks for secure Login", "Exit!", 2);
+        System.exit(0);
+    }
+    public static void main(String args[])
+    {
+        Library ob = new Library();
+        ob.Loading();
+    }
+}
