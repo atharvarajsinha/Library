@@ -36,3 +36,5 @@ This Library Management System is a comprehensive software solution designed to 
    - Run the application by double-clicking the shortcut.
 
 By following these steps, you can set up and run the Library Management System, leveraging its features to enhance the efficiency and user experience of library operations.
+
+Source Code is in folder: D:\Projects\Library\Library\
